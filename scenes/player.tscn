@@ -1,0 +1,28 @@
+[gd_scene load_steps=7 format=3 uid="uid://cvuyv5ppc1s7u"]
+
+[ext_resource type="Script" path="res://scripts/player.gd" id="1_hjn40"]
+[ext_resource type="PackedScene" uid="uid://jw8pbfnswih3" path="res://scenes/bullet.tscn" id="2_sw3i5"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_2yo3n"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_khb73"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3grkc"]
+albedo_color = Color(1, 0.290196, 0.301961, 1)
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_w76vp"]
+
+[node name="Player" type="CharacterBody3D"]
+script = ExtResource("1_hjn40")
+bullet_scene = ExtResource("2_sw3i5")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("CapsuleMesh_2yo3n")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -0.322936, 0.684029, 0)
+mesh = SubResource("BoxMesh_khb73")
+surface_material_override/0 = SubResource("StandardMaterial3D_3grkc")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("CapsuleShape3D_w76vp")

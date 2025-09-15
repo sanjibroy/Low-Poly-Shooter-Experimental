@@ -1,0 +1,14 @@
+.import/
+.godot/
+export_presets.cfg
+
+*.tmp
+*.import
+
+# Mono/C#
+.mono/
+data_*/
+
+# OS
+Thumbs.db
+.DS_Store

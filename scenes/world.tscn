@@ -1,0 +1,41 @@
+[gd_scene load_steps=8 format=3 uid="uid://c04staqqwrp1d"]
+
+[ext_resource type="PackedScene" uid="uid://cvuyv5ppc1s7u" path="res://scenes/player.tscn" id="1_4ftab"]
+[ext_resource type="Script" path="res://scripts/world.gd" id="1_5bwie"]
+[ext_resource type="Script" path="res://scripts/camera.gd" id="1_k5dwa"]
+[ext_resource type="PackedScene" uid="uid://diuxkt8vo4jto" path="res://scenes/enemy.tscn" id="3_rtgiw"]
+[ext_resource type="PackedScene" uid="uid://dvlywcka6i6wt" path="res://scenes/hud.tscn" id="4_axkbq"]
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_binrn"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_a8lsq"]
+size = Vector3(1.96606, 1, 1.96997)
+
+[node name="World" type="Node3D"]
+script = ExtResource("1_5bwie")
+enemy_scene = ExtResource("3_rtgiw")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.5, 0.866025, 0, -0.866025, 0.5, 6.11823, 11.635, 0.0360899)
+script = ExtResource("1_k5dwa")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 0, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(20, 0, 0, 0, 1, 0, 0, 0, 20, 0, 0, 0)
+mesh = SubResource("PlaneMesh_binrn")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+transform = Transform3D(20, 0, 0, 0, 1, 0, 0, 0, 20, 0.314941, 0, 0.036377)
+shape = SubResource("BoxShape3D_a8lsq")
+
+[node name="Player" parent="." groups=["player"] instance=ExtResource("1_4ftab")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.11823, 1.63503, -4.96391)
+
+[node name="Enemy" parent="." instance=ExtResource("3_rtgiw")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.15669, 0.5, -6.92097)
+
+[node name="HUD" parent="." instance=ExtResource("4_axkbq")]
